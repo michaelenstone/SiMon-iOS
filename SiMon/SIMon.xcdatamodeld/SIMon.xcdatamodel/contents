@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Locations" representedClassName="Locations" syncable="YES">
+        <attribute name="cloudID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReportItems" inverseName="location" inverseEntity="ReportItems" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="location" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Projects" inverseName="locations" inverseEntity="Projects" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="cloudID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="photos" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="reportItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReportItems" inverseName="photos" inverseEntity="ReportItems" syncable="YES"/>
+    </entity>
+    <entity name="Projects" representedClassName="Projects" syncable="YES">
+        <attribute name="cloudID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="projectName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Locations" inverseName="project" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="reports" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Reports" inverseName="project" inverseEntity="Reports" syncable="YES"/>
+    </entity>
+    <entity name="ReportItems" representedClassName="ReportItems" syncable="YES">
+        <attribute name="activityOrItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cloudID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="locations" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="reportItem" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="report" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reports" inverseName="reportItems" inverseEntity="Reports" syncable="YES"/>
+    </entity>
+    <entity name="Reports" representedClassName="Reports" syncable="YES">
+        <attribute name="cloudID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="reportDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="reportPDF" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reportRef" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reportType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="supervisor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="tempType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Projects" inverseName="reports" inverseEntity="Projects" syncable="YES"/>
+        <relationship name="reportItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ReportItems" inverseName="report" inverseEntity="ReportItems" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Locations" positionX="90" positionY="-234" width="128" height="118"/>
+        <element name="Projects" positionX="-180" positionY="-189" width="182" height="118"/>
+        <element name="Reports" positionX="88" positionY="-54" width="128" height="208"/>
+        <element name="ReportItems" positionX="270" positionY="-91" width="128" height="163"/>
+        <element name="Photo" positionX="448" positionY="-184" width="128" height="103"/>
+    </elements>
+</model>
